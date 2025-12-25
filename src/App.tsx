@@ -5,7 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import SignupPage from "./pages/SignupPage";
-import AuthProvider from "./providers/authProvider";
+import AuthProvider from "./providers/AuthProvider";
 import MUIThemeProvider from "./providers/MUIThemeProvider";
 
 function App() {

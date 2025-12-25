@@ -1,23 +1,17 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
-import { useAuth } from '../providers/authProvider';
+import { useAuth } from '../providers/AuthProvider';
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
+import { generateDummyToken } from '../helpers/generateToken';
 
 const loginFormSchema = z.object({
-    email: z.string().email("Please enter a valid email address"),
+    email: z.email("Please enter a valid email address"),
     password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
-const generateDummyToken = () => {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        const r = Math.random() * 16 | 0;
-        const v = c === 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-};
 
 const LoginPage = () => {
     const { setUser } = useAuth();
@@ -80,6 +74,7 @@ const LoginPage = () => {
                         type="email"
                         placeholder='Enter email address'
                         fullWidth
+                        required
                         size="medium"
                         error={!!error}
                         helperText={error?.message}
@@ -97,6 +92,7 @@ const LoginPage = () => {
                         type="password"
                         placeholder='Enter password'
                         fullWidth
+                        required
                         size="medium"
                         error={!!error}
                         helperText={error?.message}
