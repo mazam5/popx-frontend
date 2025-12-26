@@ -23,13 +23,13 @@ const LandingPage = () => {
       }}
     >
       <Box
-        width="80%"
+        width='60%'
         sx={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '20px' }}
       >
-        <Typography variant="h4" fontWeight="500">
+        <Typography variant="h4" fontWeight="500" fontSize={28}>
           Welcome to PopX
         </Typography>
-        <Typography color="#898b8e" fontSize={22}>
+        <Typography fontSize={18} sx={{ opacity: 0.6 }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Typography>
       </Box>

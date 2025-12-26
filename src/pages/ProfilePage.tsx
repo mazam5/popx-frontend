@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Link, Typography } from '@mui/material';
-import womenImage from '/images/women-1.jpg';
+import womenImage from '/images/women-1.png';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 const ProfilePage = () => {
@@ -68,17 +68,17 @@ const ProfilePage = () => {
               </Button>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-              <Typography variant="h6" fontWeight="500">
+              <Typography variant="h6" fontWeight="500" fontSize={15}>
                 Marry Doe
               </Typography>
-              <Typography fontSize={16}>
+              <Typography fontSize={14}>
                 <Link href="mailto:Marry@Gmail.com" underline="none" color="inherit">
                   Marry@Gmail.com
                 </Link>
               </Typography>
             </Box>
           </Box>
-          <Typography fontSize={20}>
+          <Typography fontSize={14}>
             Lorem Ipsum Dolor Sit Amet, Consectetur Sadipiscing Elitr, Sed Diam Nonumy Eirmod Tempor
             Invidunt Ut Labore Et Dolore Magna Aliquyam Erat, Sed Diam
           </Typography>

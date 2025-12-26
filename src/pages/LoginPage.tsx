@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../providers/AuthProvider';
 
@@ -6,6 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { generateDummyToken } from '../helpers/generateToken';
+import { useEffect, useState } from 'react';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const loginFormSchema = z.object({
   email: z.email('Please enter a valid email address'),
@@ -15,6 +17,7 @@ const loginFormSchema = z.object({
 const LoginPage = () => {
   const { setUser } = useAuth();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
@@ -24,6 +27,11 @@ const LoginPage = () => {
       password: '',
     },
   });
+  useEffect(() => {
+    if (!form.watch('password')) {
+      setShowPassword(false);
+    }
+  }, [form]);
 
   async function onSubmit(values: z.infer<typeof loginFormSchema>) {
     try {
@@ -52,13 +60,13 @@ const LoginPage = () => {
       }}
     >
       <Box
-        width="60%"
+        width='50%'
         sx={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '20px' }}
       >
-        <Typography variant="h4" fontWeight="500">
+        <Typography variant="h4" fontWeight="500" fontSize={28}>
           Signin to your PopX account
         </Typography>
-        <Typography color="#898b8e" fontSize={22}>
+        <Typography fontSize={18} sx={{ opacity: 0.6 }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Typography>
       </Box>
@@ -88,13 +96,28 @@ const LoginPage = () => {
             {...field}
             label="Password"
             variant="outlined"
-            type="password"
+            type={showPassword ? 'text' : 'password'}
+            required
             placeholder="Enter password"
             fullWidth
-            required
             size="medium"
             error={!!error}
             helperText={error?.message}
+            slotProps={{
+              input: {
+                endAdornment: field.value ? (
+                  <InputAdornment position="end">
+                    <IconButton
+                      edge="end"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ) : null,
+              },
+            }}
           />
         )}
       />
@@ -104,7 +127,7 @@ const LoginPage = () => {
         color="primary"
         size="large"
         disabled={!form.formState.isValid}
-        sx={{ fontWeight: '500', fontSize: 18 }}
+        sx={{ fontWeight: '500', fontSize: 16 }}
       >
         Login
       </Button>

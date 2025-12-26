@@ -1,31 +1,33 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
   Box,
   Button,
   FormControl,
   FormControlLabel,
-  FormLabel,
-  Radio,
+  FormLabel, IconButton, InputAdornment, Radio,
   RadioGroup,
   TextField,
-  Typography,
+  Typography
 } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { useAuth } from '../providers/AuthProvider';
 import { useNavigate } from 'react-router';
+import * as z from 'zod';
 import { generateDummyToken } from '../helpers/generateToken';
+import { useAuth } from '../providers/AuthProvider';
 
 const signupFormSchema = z.object({
   fullName: z.string().min(3, 'Full name must be at least 3 characters'),
-  phoneNumber: z.string().min(10, 'Phone number must be at least 10 characters'),
+  phoneNumber: z.string().regex(/^[6-9]\d{9}$/, 'Enter a valid 10-digit mobile number'),
   email: z.email('Please enter a valid email address'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
   companyName: z.string().optional(),
-  agency: z.boolean().optional(),
+  agency: z.boolean(),
 });
 
 const SignupPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useAuth();
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof signupFormSchema>>({
@@ -39,6 +41,12 @@ const SignupPage = () => {
       companyName: '',
     },
   });
+  useEffect(() => {
+    if (!form.watch('password')) {
+      setShowPassword(false);
+    }
+  }, [form]);
+
 
   async function onSubmit(values: z.infer<typeof signupFormSchema>) {
     try {
@@ -77,10 +85,10 @@ const SignupPage = () => {
         }}
       >
         <Box
-          width="55%"
-          sx={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '20px' }}
+          width='40%'
+          sx={{ marginBottom: '22px' }}
         >
-          <Typography variant="h4" fontWeight="500">
+          <Typography variant="h4" fontWeight="500" fontSize={28}>
             Create your PopX account
           </Typography>
         </Box>
@@ -111,15 +119,27 @@ const SignupPage = () => {
               label="Phone Number"
               variant="outlined"
               type="tel"
+              inputMode="numeric"
               placeholder="Enter phone number"
               fullWidth
               required
               size="medium"
               error={!!error}
               helperText={error?.message}
+              slotProps={{
+                htmlInput: { maxLength: 10 },
+                input: {
+                  startAdornment: <InputAdornment position="start">+91</InputAdornment>,
+                },
+              }}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, '');
+                field.onChange(value);
+              }}
             />
           )}
         />
+
         <Controller
           name="email"
           control={form.control}
@@ -146,13 +166,28 @@ const SignupPage = () => {
               {...field}
               label="Password"
               variant="outlined"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               required
               placeholder="Enter password"
               fullWidth
               size="medium"
               error={!!error}
               helperText={error?.message}
+              slotProps={{
+                input: {
+                  endAdornment: field.value ? (
+                    <InputAdornment position="end">
+                      <IconButton
+                        edge="end"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        aria-label={showPassword ? 'Hide password' : 'Show password'}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ) : null,
+                },
+              }}
             />
           )}
         />

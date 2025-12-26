@@ -8,7 +8,7 @@ const theme = createTheme({
       default: '#f7f8f9',
     },
     primary: {
-      main: '#6c63ff',
+      main: '#6C25FF',
     },
   },
   typography: {
@@ -20,6 +20,7 @@ const theme = createTheme({
         body: {
           fontFamily: 'Rubik, Roboto, sans-serif',
           userSelect: 'none',
+          color: '#1D2226',
         },
       },
     },
@@ -29,22 +30,22 @@ const theme = createTheme({
           width: '100%',
         },
         containedPrimary: {
-          backgroundColor: '#6c25ff',
-          color: '#fff',
+          backgroundColor: '#6C25FF',
           '&:hover': {
-            backgroundColor: '#6c05ff',
+            backgroundColor: '#6C25FF',
           },
         },
         containedSecondary: {
-          backgroundColor: '#cebafb',
-          color: 'black',
+          backgroundColor: '#6C25FF4B',
+          color: '#1D2226',
           '&:hover': {
-            backgroundColor: '#b8a8f8',
+            backgroundColor: '#6C25FF4b',
           },
         },
         root: {
           textTransform: 'none',
-          borderRadius: '10px',
+          borderRadius: '6px',
+          fontSize: '16px',
         },
       },
     },
@@ -56,23 +57,24 @@ const theme = createTheme({
           color: 'black',
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: '#e0e0e0',
-              borderRadius: '10px',
+              borderColor: '#CBCBCB',
+              borderRadius: '6px',
+              color: '#1D2226',
             },
             '&:hover fieldset': {
-              borderColor: '#6c63ff',
+              borderColor: '#6C25FF',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#6c63ff',
+              borderColor: '#6C25FF',
             },
             '&.Mui-error fieldset': {
               borderColor: '#d32f2f',
             },
           },
           '& .MuiInputLabel-root': {
-            color: '#6c63ff',
+            color: '#6C25FF',
             '&.Mui-focused': {
-              color: '#6c63ff',
+              // color: '#6C25FF',
             },
             '&.Mui-error': {
               color: '#d32f2f',
@@ -91,6 +93,9 @@ const theme = createTheme({
         root: {
           '& .MuiInputLabel-asterisk': {
             color: '#d32f2f',
+          },
+          '&.Mui-focused': {
+            color: 'black',
           },
           fontSize: '18px',
         },
