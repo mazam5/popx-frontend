@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router';
 import { useAuth } from '../providers/AuthProvider';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { generateDummyToken } from '../helpers/generateToken';
-import { useEffect, useState } from 'react';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const loginFormSchema = z.object({
   email: z.email('Please enter a valid email address'),
@@ -27,11 +27,6 @@ const LoginPage = () => {
       password: '',
     },
   });
-  useEffect(() => {
-    if (!form.watch('password')) {
-      setShowPassword(false);
-    }
-  }, [form]);
 
   async function onSubmit(values: z.infer<typeof loginFormSchema>) {
     try {
@@ -60,7 +55,7 @@ const LoginPage = () => {
       }}
     >
       <Box
-        width='50%'
+        width="50%"
         sx={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '20px' }}
       >
         <Typography variant="h4" fontWeight="500" fontSize={28}>
@@ -77,6 +72,7 @@ const LoginPage = () => {
           <TextField
             {...field}
             label="Email Address"
+            autoFocus
             variant="outlined"
             type="email"
             placeholder="Enter email address"

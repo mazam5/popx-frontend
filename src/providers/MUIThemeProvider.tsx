@@ -49,33 +49,49 @@ const theme = createTheme({
         },
       },
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          height: '40px',
+          borderRadius: '6px',
+          backgroundColor: '#fff',
+        },
+        input: {
+          padding: '10px 14px',
+          boxSizing: 'border-box',
+        },
+      },
+    },
+
     MuiTextField: {
       styleOverrides: {
         root: {
           width: '100%',
-          backgroundColor: '#fff',
-          color: 'black',
-          '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-              borderColor: '#CBCBCB',
-              borderRadius: '6px',
-              color: '#1D2226',
-            },
-            '&:hover fieldset': {
-              borderColor: '#6C25FF',
-            },
-            '&.Mui-focused fieldset': {
-              borderColor: '#6C25FF',
-            },
-            '&.Mui-error fieldset': {
-              borderColor: '#d32f2f',
-            },
+          minHeight: '49px',
+
+          '& .MuiOutlinedInput-root fieldset': {
+            borderColor: '#CBCBCB',
           },
+
+          '& .MuiOutlinedInput-root:hover fieldset': {
+            borderColor: '#6C25FF',
+          },
+
+          '& .MuiOutlinedInput-root.Mui-focused fieldset': {
+            borderColor: '#6C25FF',
+          },
+
+          '& .MuiOutlinedInput-root.Mui-error fieldset': {
+            borderColor: '#d32f2f',
+          },
+
           '& .MuiInputLabel-root': {
             color: '#6C25FF',
+
             '&.Mui-focused': {
-              // color: '#6C25FF',
+              color: '#6C25FF',
             },
+
             '&.Mui-error': {
               color: '#d32f2f',
             },

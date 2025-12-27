@@ -5,12 +5,15 @@ import {
   Button,
   FormControl,
   FormControlLabel,
-  FormLabel, IconButton, InputAdornment, Radio,
+  FormLabel,
+  IconButton,
+  InputAdornment,
+  Radio,
   RadioGroup,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import * as z from 'zod';
@@ -41,12 +44,6 @@ const SignupPage = () => {
       companyName: '',
     },
   });
-  useEffect(() => {
-    if (!form.watch('password')) {
-      setShowPassword(false);
-    }
-  }, [form]);
-
 
   async function onSubmit(values: z.infer<typeof signupFormSchema>) {
     try {
@@ -81,13 +78,10 @@ const SignupPage = () => {
           flexDirection: 'column',
           gap: '25px',
           marginBottom: '20px',
-          overflowY: 'auto',
+          // overflowY: 'auto',
         }}
       >
-        <Box
-          width='40%'
-          sx={{ marginBottom: '22px' }}
-        >
+        <Box width="40%" sx={{ marginBottom: '22px' }}>
           <Typography variant="h4" fontWeight="500" fontSize={28}>
             Create your PopX account
           </Typography>
@@ -98,6 +92,7 @@ const SignupPage = () => {
           render={({ field, fieldState: { error } }) => (
             <TextField
               {...field}
+              autoFocus
               label="Full Name"
               variant="outlined"
               type="text"

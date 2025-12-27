@@ -23,7 +23,7 @@ const LandingPage = () => {
       }}
     >
       <Box
-        width='60%'
+        width="60%"
         sx={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '20px' }}
       >
         <Typography variant="h4" fontWeight="500" fontSize={28}>
